@@ -23,6 +23,25 @@
 
 
 # Valores puestos en array de las materias universitarias
+def listas_de_materias(materias):
+    nombres = []
+    cantidad_de_materias_totales = len(materias)
+    index = 0
+    while index < cantidad_de_materias_totales:
+        nombre_materia = materias[index][1]
+        nombres.append(nombre_materia)
+        index = index + 1
+    return nombres
+
+
+# formateo de lista
+
+def formateo_lista(lista):
+    largo = len(lista)
+    for i in range(largo):
+        print(lista[i], end="")
+        print()
+    return
 
 
 # hay que setear el ultimo booleano (update: Listo, esta en base a la lista igual de licenciatura habria que evaluar que materias faltan de la ingenieria) jp:espectacular :)
@@ -85,3 +104,20 @@ materias = [
     ["3.4.135", "Tecnología e Innovación", [], [], True],
     ["2.3.056", "Derecho Informático", [], [], True]
 ]
+
+
+programa_inicial = print(
+    "Bienvenidos al programa, por favor indique una de las siguientes opciones o -1 para finlalizar el programa")
+
+print("1: Ver plan de estudios completo")
+print("2: Ver plan de estudios completo")
+print("3: Ver plan de estudios completo")
+print("4: Ver plan de estudios completo")
+print("-1: Finalizar programa")
+
+opcion_elegida = int(input())
+# Ejemplo de uso:
+
+if opcion_elegida == 1:
+    resultado = listas_de_materias(materias)
+    print(formateo_lista(resultado))
