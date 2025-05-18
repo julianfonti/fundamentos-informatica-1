@@ -110,15 +110,27 @@ programa_inicial = print(
     "Bienvenidos al programa, por favor indique una de las siguientes opciones o -1 para finlalizar el programa")
 
 print("1: Ver plan de estudios completo")
-print("2: Ver plan de estudios completo")
-print("3: Ver plan de estudios completo")
-print("4: Ver plan de estudios completo")
-print("-1: Finalizar programa")
+print("2: Ingresar materias aprobadas para ver cuales restan cursar")
+print("3: Ver que materias tengo que tener aprobadas, para cursar una materia")
+print("4: Ver listado de materias online")
+print("5: Ver si una materia esta disponible para cursar online")
+
 
 opcion_elegida = int(input())
 # Ejemplo de uso:
 
 while opcion_elegida != -1:
+#Bucle por si se ingresa un valor fuera de rango. Se solicita que se reingrese una opcion válida
+    while opcion_elegida != 1 or != 2 or != 3 or !=4 or !=5:
+
+        print ('Disculpe, la opcion elegída no es válida, ingrese un numero del 1 al 4 según lo que desee consultar.')
+        print("1: Ver plan de estudios completo")
+        print("2: Ingresar materias aprobadas para ver cuales restan cursar")
+        print("3: Ver que materias tengo que tener aprobadas, para cursar una materia")
+        print("4: Ver listado de materias online")
+        print("5: Ver si una materia esta disponible para cursar online")
+
+        opcion_elegida = int(input())
 
     if opcion_elegida == 1:
     resultado = listas_de_materias(materias)
@@ -135,5 +147,10 @@ while opcion_elegida != -1:
     if opcion_elegida == 4:
     resultado = listas_de_materias(materias)
     print(formateo_lista(resultado))
+
+    if opcion_elegida == 5:
+    resultado = listas_de_materias(materias)
+    print(formateo_lista(resultado))
+
 
 
