@@ -1,25 +1,55 @@
 # Trabajo Practico -
 
 
+# Trabajo Practico -
+
+
 # Acá van a ir y todas las funciones que se van a utilizar para el programa
+# ? Funcion que reciba por parametro ID con las materias cursadas (en base al input del usuario) y devuelve como lista la lista de materias filtradas
 
 
-# Funcion que reciba por parametro ID con las materias cursadas (en base al input del usuario) y devuelve como lista la lista de materias filtradas
+def programa_restante_post_ingreso_de_materias(lista_con_materias_aprobadas):
+    print("Hay que crear un nuevo array del programa sin incluir las materias que ya aprobamos")
+
 
 # Funcion que reciba por parametro ID con materia cursada previamente para evaluar si puede cursar una materia siguiente (Puede devolver un booleano como true - false)
 
+
+def habilitado_para_cursar(lista_con_materias_aprobadas, id_materia_que_quiero_cursar):
+    print("Hay que crear la funcion que devuelve si estoy en condiciones de cursar o no la materia")
+
+
 # Funcion que reciba por parametro ID con la materia que quiere cursar y devuelve una lista de materias que necesita cursar previamente para poder cursar la materia deseada.
 
+
+def materias_necesarias_previas(id_materia_que_quiero_cursar):
+    print("hay que crear la funcion que me retorna una lista con las materias que necesito cursar previamente para poder cursarla")
+
+
 # Funcion que responda si ya puede reclamar el titulo intermedio de la carrera🔥
+
+
+def titulo_intermedio(lista_con_materias_aprobadas):
+    print("Con la lista que me viene como parametro tengo que analizar si estoy en condiciones para reclamar el titulo intermedio o no")
+
 
 # Funcion que le permita ingresar dichas notas con su materia final y le calcule el promedio que lleva en la carrera
 
 
-# Funcion que reciba por parametror ID con materia cursada previamente y devuelve lista con las materias siguientes que estaria habilitado a cursar
+def promedio(notas):
+    print("Hay que calcular el promedio")
+
 
 # Funcion que devuelva listado de materias online
+def materias_online(lista_materias):
+    print("Hay que analizar las materias que se pueden cursar online")
+
 
 # Funcion que devuelve si una materia con ID (pasado por parametro) puede ser cursada por online o no
+
+
+def materia_online_id(id):
+    print("Devuelve si una materia se puede cursar online o no")
 
 
 # Valores puestos en array de las materias universitarias
@@ -120,10 +150,10 @@ opcion_elegida = int(input())
 # Ejemplo de uso:
 
 while opcion_elegida != -1:
-#Bucle por si se ingresa un valor fuera de rango. Se solicita que se reingrese una opcion válida
+    # Bucle por si se ingresa un valor fuera de rango. Se solicita que se reingrese una opcion válida
     while opcion_elegida != 1 and opcion_elegida != 2 and opcion_elegida != 3 and opcion_elegida != 4 and opcion_elegida != 5:
 
-        print ('Disculpe, la opcion elegída no es válida, ingrese un numero del 1 al 5 según lo que desee consultar.')
+        print('Disculpe, la opcion elegída no es válida, ingrese un numero del 1 al 5 según lo que desee consultar.')
         print("1: Ver plan de estudios completo")
         print("2: Ingresar materias aprobadas para ver cuales restan cursar")
         print("3: Ver que materias tengo que tener aprobadas, para cursar una materia")
@@ -137,8 +167,8 @@ while opcion_elegida != -1:
         print(formateo_lista(resultado))
 
     if opcion_elegida == 2:
-        print ('Ingrese las materias aprobadas para ver cuales restan cursar')
-        materias_aprobadas= int(float ())
+        print('Ingrese las materias aprobadas para ver cuales restan cursar')
+        materias_aprobadas = int(float())
         resultado = listas_de_materias(materias)
         print(formateo_lista(resultado))
 
@@ -153,6 +183,3 @@ while opcion_elegida != -1:
     if opcion_elegida == 5:
         resultado = listas_de_materias(materias)
         print(formateo_lista(resultado))
-
-
-
