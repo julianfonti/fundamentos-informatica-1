@@ -121,7 +121,7 @@ opcion_elegida = int(input())
 
 while opcion_elegida != -1:
 #Bucle por si se ingresa un valor fuera de rango. Se solicita que se reingrese una opcion válida
-    while opcion_elegida !=1 or !=2 or != 3 or !=4 or !=5:
+    while opcion_elegida != 1 and opcion_elegida != 2 and opcion_elegida != 3 and opcion_elegida != 4 and opcion_elegida != 5:
 
         print ('Disculpe, la opcion elegída no es válida, ingrese un numero del 1 al 5 según lo que desee consultar.')
         print("1: Ver plan de estudios completo")
@@ -137,6 +137,8 @@ while opcion_elegida != -1:
     print(formateo_lista(resultado))
 
     if opcion_elegida == 2:
+    print ('Ingrese las materias aprobadas para ver cuales restan cursar')
+    materias_aprobadas= int(float ())
     resultado = listas_de_materias(materias)
     print(formateo_lista(resultado))
 
