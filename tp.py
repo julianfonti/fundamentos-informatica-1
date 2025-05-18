@@ -118,6 +118,22 @@ print("-1: Finalizar programa")
 opcion_elegida = int(input())
 # Ejemplo de uso:
 
-if opcion_elegida == 1:
+while opcion_elegida != -1:
+
+    if opcion_elegida == 1:
     resultado = listas_de_materias(materias)
     print(formateo_lista(resultado))
+
+    if opcion_elegida == 2:
+    resultado = listas_de_materias(materias)
+    print(formateo_lista(resultado))
+
+    if opcion_elegida == 3:
+    resultado = listas_de_materias(materias)
+    print(formateo_lista(resultado))
+
+    if opcion_elegida == 4:
+    resultado = listas_de_materias(materias)
+    print(formateo_lista(resultado))
+
+
