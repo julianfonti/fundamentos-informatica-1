@@ -133,26 +133,26 @@ while opcion_elegida != -1:
         opcion_elegida = int(input())
 
     if opcion_elegida == 1:
-    resultado = listas_de_materias(materias)
-    print(formateo_lista(resultado))
+        resultado = listas_de_materias(materias)
+        print(formateo_lista(resultado))
 
     if opcion_elegida == 2:
-    print ('Ingrese las materias aprobadas para ver cuales restan cursar')
-    materias_aprobadas= int(float ())
-    resultado = listas_de_materias(materias)
-    print(formateo_lista(resultado))
+        print ('Ingrese las materias aprobadas para ver cuales restan cursar')
+        materias_aprobadas= int(float ())
+        resultado = listas_de_materias(materias)
+        print(formateo_lista(resultado))
 
     if opcion_elegida == 3:
-    resultado = listas_de_materias(materias)
-    print(formateo_lista(resultado))
+        resultado = listas_de_materias(materias)
+        print(formateo_lista(resultado))
 
     if opcion_elegida == 4:
-    resultado = listas_de_materias(materias)
-    print(formateo_lista(resultado))
+        resultado = listas_de_materias(materias)
+        print(formateo_lista(resultado))
 
     if opcion_elegida == 5:
-    resultado = listas_de_materias(materias)
-    print(formateo_lista(resultado))
+        resultado = listas_de_materias(materias)
+        print(formateo_lista(resultado))
 
 
 
