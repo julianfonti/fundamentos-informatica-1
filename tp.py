@@ -121,9 +121,9 @@ opcion_elegida = int(input())
 
 while opcion_elegida != -1:
 #Bucle por si se ingresa un valor fuera de rango. Se solicita que se reingrese una opcion válida
-    while opcion_elegida != 1 or != 2 or != 3 or !=4 or !=5:
+    while opcion_elegida !=1 or !=2 or != 3 or !=4 or !=5:
 
-        print ('Disculpe, la opcion elegída no es válida, ingrese un numero del 1 al 4 según lo que desee consultar.')
+        print ('Disculpe, la opcion elegída no es válida, ingrese un numero del 1 al 5 según lo que desee consultar.')
         print("1: Ver plan de estudios completo")
         print("2: Ingresar materias aprobadas para ver cuales restan cursar")
         print("3: Ver que materias tengo que tener aprobadas, para cursar una materia")
