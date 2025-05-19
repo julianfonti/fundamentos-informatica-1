@@ -42,13 +42,24 @@ def promedio(notas):
 
 # Funcion que devuelva listado de materias online
 def materias_online(lista_materias):
-    print("Hay que analizar las materias que se pueden cursar online")
+    nombres = []
+    print(lista_materias)
+    cantidad_total = len(lista_materias)
+    print(cantidad_total)
+    index = 0
+    while index < cantidad_total:
+        if lista_materias[index][4] == True:
+            nombre_materia = lista_materias[index][1]
+            nombres.append(nombre_materia)
+        index = index + 1
+    return nombres
 
 
 # Funcion que devuelve si una materia con ID (pasado por parametro) puede ser cursada por online o no
 
 
 def materia_online_id(id):
+
     print("Devuelve si una materia se puede cursar online o no")
 
 
@@ -134,7 +145,7 @@ materias = [
     ["3.4.135", "Tecnología e Innovación", [], [], True],
     ["2.3.056", "Derecho Informático", [], [], True]
 ]
-
+""" 
 
 programa_inicial = print(
     "Bienvenidos al programa, por favor indique una de las siguientes opciones o -1 para finlalizar el programa")
@@ -143,9 +154,12 @@ print("1: Ver plan de estudios completo")
 print("2: Ingresar materias aprobadas para ver cuales restan cursar")
 print("3: Ver que materias tengo que tener aprobadas, para cursar una materia")
 print("4: Ver listado de materias online")
-print("5: Ver si una materia esta disponible para cursar online")
+print("5: Ver si una materia esta disponible para cursar online") """
 
 
+print(materias_online(materias))
+
+""" 
 opcion_elegida = int(input())
 # Ejemplo de uso:
 
@@ -183,3 +197,4 @@ while opcion_elegida != -1:
     if opcion_elegida == 5:
         resultado = listas_de_materias(materias)
         print(formateo_lista(resultado))
+ """
