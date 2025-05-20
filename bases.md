@@ -7,6 +7,11 @@ Por ejemplo:
 [03, "Programación II", 102.0,[101.0],[115.0, 122.0], False]
 [04, "Programación III", 115.0,[102.0],[102.0, 103.0], False]
 
+Formato de materias aprobadas:
+[codigo de la materia ,nombre de la materia, nota]
+```py
+materia_aprobada = ["3.4.069","fundamentos de informática",8]
+ ```
 Entradas Posibles:
 -- Materias ya aprobadas --[Saldria en funcion a eso la lista - las materias que el usuario ya aprobo]
 -- Cantidad de materias que quiere hacer por semana (daria como salida las recomendaciones nuestra en funcion a analisis de las correlativas posteriores -- en la salida se debe priorizar las que tengan correlativas posteriores AND que el usuario haya aprobado las anteriores)

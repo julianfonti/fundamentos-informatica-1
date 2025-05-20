@@ -3,6 +3,46 @@
 
 # Trabajo Practico -
 
+# Funcion para cargar materias aprobadas
+def Cargar_materias_aprobadas(materias):
+    materias_aprobadas = []
+    for i in range(len(materias)):
+        aprobo = ingresar_y_validar_aprobado(materias[i][1])
+        if aprobo == "si":
+            nota = ingresar_y_validar_nota(materias[i][1])
+            if nota != 0:
+                materia_aprobada = [materias[i][0], materias[i][1], nota]
+        
+    return materias_aprobadas
+
+def ingresar_y_validar_nota(nombre_materia):
+    nota = int(input("ingrese la nota de la materia " + nombre_materia + ": "))
+    while nota < 0 or nota > 10:
+        print("La nota ingresada no es válida. Ingrese nuevamente la nota de la materia " + nombre_materia + ":")
+        nota = int(input("ingrese la nota de la materia " + nombre_materia + ": "))
+    if nota <4:
+        print("La nota ingresada es menor a 4, por lo tanto no se considera aprobada la materia " + nombre_materia)
+        nota = 0
+    return nota
+
+def ingresar_y_validar_aprobado(nombre_materia):
+    aprobado = input("¿Aprobaste la materia " + nombre_materia + "? (si/no): ")
+    while aprobado != "si" and aprobado != "no":
+        print("La respuesta ingresada no es válida. Ingrese nuevamente si aprobó la materia " + nombre_materia + ":")
+        aprobado = input()
+    return aprobado
+
+# Valores puestos en array de las materias universitarias
+def listas_de_materias(materias):
+    nombres = []
+    cantidad_de_materias_totales = len(materias)
+    index = 0
+    while index < cantidad_de_materias_totales:
+        nombre_materia = materias[index][1]
+        nombres.append(nombre_materia)
+        index = index + 1
+    return nombres
+
 
 # Acá van a ir y todas las funciones que se van a utilizar para el programa
 # ? Funcion que reciba por parametro ID con las materias cursadas (en base al input del usuario) y devuelve como lista la lista de materias filtradas
