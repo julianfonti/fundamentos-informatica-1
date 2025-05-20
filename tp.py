@@ -6,10 +6,16 @@
 
 # Acá van a ir y todas las funciones que se van a utilizar para el programa
 # ? Funcion que reciba por parametro ID con las materias cursadas (en base al input del usuario) y devuelve como lista la lista de materias filtradas
-
-
-def programa_restante_post_ingreso_de_materias(lista_con_materias_aprobadas):
-    print("Hay que crear un nuevo array del programa sin incluir las materias que ya aprobamos")
+def programa_restante_post_ingreso_de_materias(lista_con_materias_aprobadas, lista_materias):
+    materias_restantes = []
+    for i in range(len(lista_materias)):
+        ya_aprobada = False
+        for j in range(len(lista_con_materias_aprobadas)):
+            if lista_materias[i] == lista_con_materias_aprobadas[j]:
+                ya_aprobada = True
+        if ya_aprobada == False:
+            materias_restantes.append(lista_materias[i])
+    return materias_restantes
 
 
 # Funcion que reciba por parametro ID con materia cursada previamente para evaluar si puede cursar una materia siguiente (Puede devolver un booleano como true - false)
@@ -145,7 +151,15 @@ materias = [
     ["3.4.135", "Tecnología e Innovación", [], [], True],
     ["2.3.056", "Derecho Informático", [], [], True]
 ]
-""" 
+
+materias_harcodeadas_aprobadas = [
+    ["3.4.069", "Fundamentos de Informática", [], ["3.4.071"], True],
+    ["3.4.164", "Sistemas de Información I", [], ["3.4.207"], True],
+    ["2.1.002", "Pensamiento Crítico y Comunicación", [], [], True],
+    ["3.4.043", "Teoría de Sistemas", [], [], True],
+    ["3.1.050", "Elementos de Álgebra y Geometría", [], ["3.1.051"], False],
+]
+
 
 programa_inicial = print(
     "Bienvenidos al programa, por favor indique una de las siguientes opciones o -1 para finlalizar el programa")
@@ -154,12 +168,9 @@ print("1: Ver plan de estudios completo")
 print("2: Ingresar materias aprobadas para ver cuales restan cursar")
 print("3: Ver que materias tengo que tener aprobadas, para cursar una materia")
 print("4: Ver listado de materias online")
-print("5: Ver si una materia esta disponible para cursar online") """
+print("5: Ver si una materia esta disponible para cursar online")
 
 
-print(materias_online(materias))
-
-""" 
 opcion_elegida = int(input())
 # Ejemplo de uso:
 
@@ -197,4 +208,3 @@ while opcion_elegida != -1:
     if opcion_elegida == 5:
         resultado = listas_de_materias(materias)
         print(formateo_lista(resultado))
- """
