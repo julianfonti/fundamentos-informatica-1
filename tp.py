@@ -12,18 +12,22 @@ def Cargar_materias_aprobadas(materias):
             nota = ingresar_y_validar_nota(materias[i][1])
             if nota != 0:
                 materia_aprobada = [materias[i][0], materias[i][1], nota]
-        
+
     return materias_aprobadas
+
 
 def ingresar_y_validar_nota(nombre_materia):
     nota = int(input("ingrese la nota de la materia " + nombre_materia + ": "))
     while nota < 0 or nota > 10:
-        print("La nota ingresada no es válida. Ingrese nuevamente la nota de la materia " + nombre_materia + ":")
-        nota = int(input("ingrese la nota de la materia " + nombre_materia + ": "))
-    if nota <4:
+        print("La nota ingresada no es válida. Ingrese nuevamente la nota de la materia " +
+              nombre_materia + ":")
+        nota = int(
+            input("ingrese la nota de la materia " + nombre_materia + ": "))
+    if nota < 4:
         print("La nota ingresada es menor a 4, por lo tanto no se considera aprobada la materia " + nombre_materia)
         nota = 0
     return nota
+
 
 def ingresar_y_validar_aprobado(nombre_materia):
     aprobado = input("¿Aprobaste la materia " + nombre_materia + "? (si/no): ")
@@ -33,6 +37,8 @@ def ingresar_y_validar_aprobado(nombre_materia):
     return aprobado
 
 # Valores puestos en array de las materias universitarias
+
+
 def listas_de_materias(materias):
     nombres = []
     cantidad_de_materias_totales = len(materias)
@@ -192,13 +198,8 @@ materias = [
     ["2.3.056", "Derecho Informático", [], [], True]
 ]
 
-materias_harcodeadas_aprobadas = [
-    ["3.4.069", "Fundamentos de Informática", [], ["3.4.071"], True],
-    ["3.4.164", "Sistemas de Información I", [], ["3.4.207"], True],
-    ["2.1.002", "Pensamiento Crítico y Comunicación", [], [], True],
-    ["3.4.043", "Teoría de Sistemas", [], [], True],
-    ["3.1.050", "Elementos de Álgebra y Geometría", [], ["3.1.051"], False],
-]
+materias_necesarias_para_titulo_intermedio = ['3.4.069', '3.4.164', '2.1.002', '3.4.043', '3.1.050', '3.4.071', '3.3.121', '3.2.178', '3.4.072', '3.1.024', '3.1.051', '3.4.074', '3.4.207', '3.4.075',
+                                              '3.1.052', '3.1.053', '3.4.077', '3.4.208', '3.4.078', '3.4.209', '3.1.054', '3.4.210', '3.4.211', '3.4.212', '3.4.213', '3.1.049', '2.4.216']
 
 
 programa_inicial = print(
