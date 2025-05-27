@@ -138,10 +138,34 @@ def materia_online_id(materias):
             print("Fin de la verificación.")
 
 
-def materia_online_id(id):
+def materia_online_id(materias):
+    verificar = True
 
-    print("Devuelve si una materia se puede cursar online o no")
-#JULI Crear funcion para verificar si la materia se puede hacer online.
+    while verificar == True:
+        # 1 Pido al usuario que escriba el código de una materia
+        codigo_buscar = input("Ingrese el código de la materia para verificar si se puede cursar online: ")
+
+        # 2 Recorro cada materia dentro de la lista "materias"
+        encontrada = False
+        for materia in materias:
+            # materia[0] es el código de la materia
+            if materia[0] == codigo_buscar:
+                encontrada = True
+                # 3 Verifico si se puede cursar online (último valor de la lista)
+                if materia[-1] == True:
+                    print("La materia '" + materia[1] + "' se puede cursar online.")
+                else:
+                    print("La materia '" + materia[1] + "' NO se puede cursar online.")
+
+        # 4 Si no se encontró la materia
+        if encontrada == False:
+            print("Código de materia no encontrado.")
+
+        # 5 Pregunto si quiere verificar otra materia
+        respuesta = input("¿Querés verificar otra materia? (si/no): ")
+        if respuesta != "si":
+            verificar = False
+            print("Fin de la verificación.")
 
 # Valores puestos en array de las materias universitarias
 def listas_de_materias(materias):
@@ -243,6 +267,8 @@ print("2: Ingresar materias aprobadas para ver cuales restan cursar")
 print("3: Ver que materias tengo que tener aprobadas, para cursar una materia")
 print("4: Ver listado de materias online")
 print("5: Ver si una materia esta disponible para cursar online")
+#ver si agregamos la función de promedio.
+#ver si sumamos la opcion de mostrar nota en materia ya aprobada
 
 
 opcion_elegida = int(input())
@@ -274,7 +300,7 @@ while opcion_elegida != -1:
         #FALTA ESTA DEF
 
     if opcion_elegida == 3: #3: Ver que materias tengo que tener aprobadas, para cursar una materia
-        resultado = listas_de_materias(materias)
+        resultado = materia_online_id(materias)
         print(formateo_lista(resultado))
 
     if opcion_elegida == 4: #4: Ver listado de materias online
