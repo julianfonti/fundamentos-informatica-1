@@ -68,7 +68,7 @@ def registrar_materias_aprobadas(materias, lista_aprobadas):
 
 def habilitado_para_cursar(lista_con_materias_aprobadas, id_materia_que_quiero_cursar):
     print("Hay que crear la funcion que devuelve si estoy en condiciones de cursar o no la materia")
-#JULI VOY A VER DE HACER DEF PARA VERIFIAR SI SE PUEDE CURSAR LA MATERIA INGRESADA.
+#FALTA ESTA DEF.
 
 # Funcion que reciba por parametro ID con la materia que quiere cursar y devuelve una lista de materias que necesita cursar previamente para poder cursar la materia deseada.
 
@@ -250,7 +250,7 @@ opcion_elegida = int(input())
 
 while opcion_elegida != -1:
     # Bucle por si se ingresa un valor fuera de rango. Se solicita que se reingrese una opcion válida
-    while opcion_elegida != 1 and opcion_elegida != 2 and opcion_elegida != 3 and opcion_elegida != 4 and opcion_elegida != 5:
+    while opcion_elegida <1 or opcion_elegida >5:
 
         print('Disculpe, la opcion elegída no es válida, ingrese un numero del 1 al 5 según lo que desee consultar.')
         print("1: Ver plan de estudios completo")
@@ -271,15 +271,16 @@ while opcion_elegida != -1:
         materias_aprobadas = int(float())
         resultado = listas_de_materias(materias)
         print(formateo_lista(resultado))
+        #FALTA ESTA DEF
 
-    if opcion_elegida == 3:
+    if opcion_elegida == 3: #3: Ver que materias tengo que tener aprobadas, para cursar una materia
         resultado = listas_de_materias(materias)
         print(formateo_lista(resultado))
 
-    if opcion_elegida == 4:
+    if opcion_elegida == 4: #4: Ver listado de materias online
         resultado = listas_de_materias(materias)
         print(formateo_lista(resultado))
 
-    if opcion_elegida == 5:
+    if opcion_elegida == 5: #5: Ver si una materia esta disponible para cursar online
         resultado = listas_de_materias(materias)
         print(formateo_lista(resultado))
