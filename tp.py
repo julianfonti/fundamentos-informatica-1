@@ -20,12 +20,8 @@ def programa_restante_post_ingreso_de_materias(lista_con_materias_aprobadas, lis
 # Lista vacía donde se almacenarán los códigos de materias aprobadas
 
 # Función para registrar materias aprobadas
-
-
-# puedo cambiar el while para salir si ingresa -1 ?
-
 def registrar_materias_aprobadas(materias, lista_aprobadas):
-    print("Ingresa 0 si queres ver la lista nuevamente")
+    print("Ingresa 0 si querés ver la lista nuevamente")
     print("Ingresá los códigos de las materias que aprobaste.")
     print("Escribí -1 para terminar.")
     codigo = int(input("Código de materia aprobada: "))
@@ -33,24 +29,17 @@ def registrar_materias_aprobadas(materias, lista_aprobadas):
         if codigo == 0:
             recorrer_plan_completo(materias)
         else:
-            i = 0
-            encontrado = False
-            while i < len(materias):
-                if materias[i][0] == codigo:
-                    encontrado = True
-                    j = 0
-                    repetido = False
-                    while j < len(lista_aprobadas):
-                        if lista_aprobadas[j] == codigo:
-                            repetido = True
-                            print("Ya ingresaste esa materia previamente")
-                        j = j + 1
-                    if repetido == False:
+            existe = False
+            for materia in materias:
+                if materia[0] == codigo:
+                    existe = True
+                    if codigo in lista_aprobadas:
+                        print("Ya ingresaste esa materia previamente")
+                    else:
                         lista_aprobadas.append(codigo)
-                i = i + 1
-            if encontrado == False:
+            if existe == False:
                 print(
-                    "No se encontro ese codigo de materia presione 0 para ver la lista de materias nuevamente")
+                    "No se encontró ese código de materia. Presione 0 para ver la lista de materias nuevamente")
         codigo = int(input("Código de materia aprobada: "))
     return lista_aprobadas
 
@@ -75,7 +64,7 @@ def registrar_materias_aprobadas(materias, lista_aprobadas):
                         ya_aprobada = True
                     j = j + 1
 
-                if ya_aprobada == False:
+                if ya_aprobada == False:x
                     lista_aprobadas.append(codigo)
                     print("Materia registrada como aprobada:", materias[i][1])
                 else:
