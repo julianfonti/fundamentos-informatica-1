@@ -1,9 +1,6 @@
 # Trabajo Practico -
 
 
-# Trabajo Practico -
-
-
 # Acá van a ir y todas las funciones que se van a utilizar para el programa
 # ? Funcion que reciba por parametro ID con las materias cursadas (en base al input del usuario) y devuelve como lista la lista de materias filtradas
 def programa_restante_post_ingreso_de_materias(lista_con_materias_aprobadas, lista_materias):
@@ -17,58 +14,86 @@ def programa_restante_post_ingreso_de_materias(lista_con_materias_aprobadas, lis
             materias_restantes.append(lista_materias[i])
     return materias_restantes
 
-#Funcion que registra las materias ingresadas por el usuario como aprobadas. Verifica que esté en lista materias, en caso de ser correcto la almacena.
-#Para finalizar con el ingreso de materias aprobadas ingresa -1.
+
+# Funcion que registra las materias ingresadas por el usuario como aprobadas. Verifica que esté en lista materias, en caso de ser correcto la almacena.
+# Para finalizar con el ingreso de materias aprobadas ingresa -1.
 # Lista vacía donde se almacenarán los códigos de materias aprobadas
-lista_aprobadas = []
 
 # Función para registrar materias aprobadas
 
-def registrar_materias_aprobadas(materias, lista_aprobadas):# puedo cambiar el while para salir si ingresa -1 ?
+
+# puedo cambiar el while para salir si ingresa -1 ?
+
+def registrar_materias_aprobadas(materias, lista_aprobadas):
+    print("Ingresa 0 si queres ver la lista nuevamente")
     print("Ingresá los códigos de las materias que aprobaste.")
     print("Escribí -1 para terminar.")
-
-    salir = False  # Bandera de control para salir de ciclo while.
-
-    while salir == False:
-        codigo = input("Código de materia aprobada: ")
-
-        if codigo == "-1":
-            salir = True  # Activamos la bandera para salir del while.
+    codigo = int(input("Código de materia aprobada: "))
+    while codigo != -1:
+        if codigo == 0:
+            recorrer_plan_completo(materias)
         else:
             i = 0
-            materia_encontrada = False
-
-            # Buscamos si el código está en la lista de materias
+            encontrado = False
             while i < len(materias):
                 if materias[i][0] == codigo:
-                    materia_encontrada = True
-
-                    # Verificamos si ya está en la lista de aprobadas
+                    encontrado = True
                     j = 0
-                    ya_aprobada = False
+                    repetido = False
                     while j < len(lista_aprobadas):
                         if lista_aprobadas[j] == codigo:
-                            ya_aprobada = True
+                            repetido = True
+                            print("Ya ingresaste esa materia previamente")
                         j = j + 1
-
-                    if ya_aprobada == False:
+                    if repetido == False:
                         lista_aprobadas.append(codigo)
-                        print("Materia registrada como aprobada:", materias[i][1])
-                    else:
-                        print("Ya registraste esta materia.")
                 i = i + 1
+            if encontrado == False:
+                print(
+                    "No se encontro ese codigo de materia presione 0 para ver la lista de materias nuevamente")
+        codigo = int(input("Código de materia aprobada: "))
+    return lista_aprobadas
 
-            if materia_encontrada == False:
-                print("Código no encontrado en la lista de materias.")
 
+""" def registrar_materias_aprobadas(materias, lista_aprobadas):
+    print("Ingresá los códigos de las materias que aprobaste.")
+    print("Escribí -1 para terminar.")
+    codigo = int(input("Código de materia aprobada: "))
+    while codigo != -1:
+        i = 0
+        materia_encontrada = False
+
+        # Buscamos el código en la lista de materias
+        while i < len(materias):
+            if materias[i][0] == codigo:
+                materia_encontrada = True
+
+                j = 0
+                ya_aprobada = False
+                while j < len(lista_aprobadas):
+                    if lista_aprobadas[j] == codigo:
+                        ya_aprobada = True
+                    j = j + 1
+
+                if ya_aprobada == False:
+                    lista_aprobadas.append(codigo)
+                    print("Materia registrada como aprobada:", materias[i][1])
+                else:
+                    print("Ya registraste esta materia.")
+            i = i + 1
+
+        if materia_encontrada == False:
+            print("Código no encontrado en la lista de materias.")
+
+        codigo = input("Código de materia aprobada: ")
+ """
 
 # Funcion que reciba por parametro ID con materia cursada previamente para evaluar si puede cursar una materia siguiente (Puede devolver un booleano como true - false)
 
 
 def habilitado_para_cursar(lista_con_materias_aprobadas, id_materia_que_quiero_cursar):
     print("Hay que crear la funcion que devuelve si estoy en condiciones de cursar o no la materia")
-#FALTA ESTA DEF.
+# FALTA ESTA DEF.
 
 # Funcion que reciba por parametro ID con la materia que quiere cursar y devuelve una lista de materias que necesita cursar previamente para poder cursar la materia deseada.
 
@@ -110,10 +135,10 @@ def materias_online(lista_materias):
 
 def materia_online_id(materias):
     verificar = True
-
     while verificar == True:
         # 1 Pido al usuario que escriba el código de una materia
-        codigo_buscar = input("Ingrese el código de la materia para verificar si se puede cursar online: ")
+        codigo_buscar = input(
+            "Ingrese el código de la materia para verificar si se puede cursar online: ")
 
         # 2 Recorro cada materia dentro de la lista "materias"
         encontrada = False
@@ -123,9 +148,11 @@ def materia_online_id(materias):
                 encontrada = True
                 # 3 Verifico si se puede cursar online (último valor de la lista)
                 if materia[-1] == True:
-                    print("La materia '" + materia[1] + "' se puede cursar online.")
+                    print("La materia '" +
+                          materia[1] + "' se puede cursar online.")
                 else:
-                    print("La materia '" + materia[1] + "' NO se puede cursar online.")
+                    print("La materia '" +
+                          materia[1] + "' NO se puede cursar online.")
 
         # 4 Si no se encontró la materia
         if encontrada == False:
@@ -140,10 +167,10 @@ def materia_online_id(materias):
 
 def materia_online_id(materias):
     verificar = True
-
     while verificar == True:
         # 1 Pido al usuario que escriba el código de una materia
-        codigo_buscar = input("Ingrese el código de la materia para verificar si se puede cursar online: ")
+        codigo_buscar = input(
+            "Ingrese el código de la materia para verificar si se puede cursar online: ")
 
         # 2 Recorro cada materia dentro de la lista "materias"
         encontrada = False
@@ -153,9 +180,11 @@ def materia_online_id(materias):
                 encontrada = True
                 # 3 Verifico si se puede cursar online (último valor de la lista)
                 if materia[-1] == True:
-                    print("La materia '" + materia[1] + "' se puede cursar online.")
+                    print("La materia '" +
+                          materia[1] + "' se puede cursar online.")
                 else:
-                    print("La materia '" + materia[1] + "' NO se puede cursar online.")
+                    print("La materia '" +
+                          materia[1] + "' NO se puede cursar online.")
 
         # 4 Si no se encontró la materia
         if encontrada == False:
@@ -168,6 +197,8 @@ def materia_online_id(materias):
             print("Fin de la verificación.")
 
 # Valores puestos en array de las materias universitarias
+
+
 def listas_de_materias(materias):
     nombres = []
     cantidad_de_materias_totales = len(materias)
@@ -180,13 +211,38 @@ def listas_de_materias(materias):
 
 
 # formateo de lista
-
 def recorrer_plan_completo(lista):
     largo = len(lista)
     for i in range(largo):
-        print(lista[i][1], end="")# printeo unicamente el nombre que esta en la segunda posicion de cada lista
-        print()
-    
+        # printeo unicamente el nombre que esta en la segunda posicion de cada lista
+        print(lista[i][0], "-", lista[i][1])
+
+
+def menu_seleccionado(opcion_elegida, materias):
+    print("Bienvenido al sistema de consulta de materias de la carrera de Ingeniería en Informática.")
+    if opcion_elegida == 1:
+        # resultado = listas_de_materias(materias)
+        # print(formateo_lista(resultado))
+        recorrer_plan_completo(materias)
+
+    if opcion_elegida == 2:
+        print('Ingrese las materias aprobadas para ver cuales restan cursar')
+        registrar_materias_aprobadas(materias, lista_materias_aprobadas)
+        print(lista_materias_aprobadas)
+        # FALTA ESTA DEF
+
+    if opcion_elegida == 3:  # 3: Ver que materias tengo que tener aprobadas, para cursar una materia
+        resultado = materia_online_id(materias)
+        # print(formateo_lista(resultado))
+
+    if opcion_elegida == 4:  # 4: Ver listado de materias online
+        resultado = listas_de_materias(materias)
+        # print(formateo_lista(resultado))
+
+    if opcion_elegida == 5:  # 5: Ver si una materia esta disponible para cursar online
+        resultado = listas_de_materias(materias)
+        # print(formateo_lista(resultado))
+
 
 # hay que setear el ultimo booleano (update: Listo, esta en base a la lista igual de licenciatura habria que evaluar que materias faltan de la ingenieria) jp:espectacular :)
 materias = materias = [
@@ -244,7 +300,6 @@ materias = materias = [
     [52, "Derecho Informático", [], [], True]
 ]
 
-    
 
 materias_harcodeadas_aprobadas = [
     ["3.4.069", "Fundamentos de Informática", [], ["3.4.071"], True],
@@ -254,11 +309,17 @@ materias_harcodeadas_aprobadas = [
     ["3.1.050", "Elementos de Álgebra y Geometría", [], ["3.1.051"], False],
 ]
 
+
+lista_materias_aprobadas = [
+
+]
+
+
 def recorrer_menu():
     print("Ingrese una opción del menú:")
     for i in range(len(Lista_menu)):
         print(Lista_menu[i])
-    
+
 
 Lista_menu = [
     "1: Ver plan de estudios completo",
@@ -266,48 +327,22 @@ Lista_menu = [
     "3: Ver que materias tengo que tener aprobadas, para cursar una materia",
     "4: Ver listado de materias online",
     "5: Ver si una materia esta disponible para cursar online"]
-#ver si agregamos la función de promedio.
-#ver si sumamos la opcion de mostrar nota en materia ya aprobada
+# ver si agregamos la función de promedio.
+# ver si sumamos la opcion de mostrar nota en materia ya aprobada
+
 
 def main(materias):
-    materias_aprobadas = []
-    print("Bienvenido al sistema de consulta de materias de la carrera de Ingeniería en Informática.")
-    recorrer_menu()
-
-    opcion_elegida = int(input())
-    while opcion_elegida != -1 and (opcion_elegida <1 or opcion_elegida > len(Lista_menu)):
-        print("Opción no válida. Por favor, ingrese una opción del menú:")
+    opcion_elegida = 0
+    while opcion_elegida != -1:
         recorrer_menu()
         opcion_elegida = int(input())
-
-    menu_seleccionado(opcion_elegida, materias)
-
-
-def menu_seleccionado(opcion_elegida, materias):
-    if opcion_elegida == 1:
-        # resultado = listas_de_materias(materias)
-        # print(formateo_lista(resultado))
-        recorrer_plan_completo(materias)
-
-    if opcion_elegida == 2:
-        print('Ingrese las materias aprobadas para ver cuales restan cursar')
-        registrar_materias_aprobadas(materias, materias_aprobadas)
-        materias_aprobadas = int(float())
-        resultado = listas_de_materias(materias)
-        # print(formateo_lista(resultado))
-        #FALTA ESTA DEF
-
-    if opcion_elegida == 3: #3: Ver que materias tengo que tener aprobadas, para cursar una materia
-        resultado = materia_online_id(materias)
-        # print(formateo_lista(resultado))
-
-    if opcion_elegida == 4: #4: Ver listado de materias online
-        resultado = listas_de_materias(materias)
-        # print(formateo_lista(resultado))
-
-    if opcion_elegida == 5: #5: Ver si una materia esta disponible para cursar online
-        resultado = listas_de_materias(materias)
-        # print(formateo_lista(resultado))
+        if opcion_elegida >= 1 and opcion_elegida <= len(Lista_menu):
+            menu_seleccionado(opcion_elegida, materias)
+            opcion_elegida = 0
+        else:
+            print("Opción no válida. Por favor, ingrese una opción del menú:")
+            recorrer_menu()
+        opcion_elegida = int(input())
 
 
 main(materias)
