@@ -1,5 +1,5 @@
 # Trabajo Practico -
-
+import os
 
 # Acá van a ir y todas las funciones que se van a utilizar para el programa
 # ? Funcion que reciba por parametro ID con las materias cursadas (en base al input del usuario) y devuelve como lista la lista de materias filtradas
@@ -43,39 +43,6 @@ def registrar_materias_aprobadas(materias, lista_aprobadas):
         codigo = int(input("Código de materia aprobada: "))
     return lista_aprobadas
 
-
-""" def registrar_materias_aprobadas(materias, lista_aprobadas):
-    print("Ingresá los códigos de las materias que aprobaste.")
-    print("Escribí -1 para terminar.")
-    codigo = int(input("Código de materia aprobada: "))
-    while codigo != -1:
-        i = 0
-        materia_encontrada = False
-
-        # Buscamos el código en la lista de materias
-        while i < len(materias):
-            if materias[i][0] == codigo:
-                materia_encontrada = True
-
-                j = 0
-                ya_aprobada = False
-                while j < len(lista_aprobadas):
-                    if lista_aprobadas[j] == codigo:
-                        ya_aprobada = True
-                    j = j + 1
-
-                if ya_aprobada == False:x
-                    lista_aprobadas.append(codigo)
-                    print("Materia registrada como aprobada:", materias[i][1])
-                else:
-                    print("Ya registraste esta materia.")
-            i = i + 1
-
-        if materia_encontrada == False:
-            print("Código no encontrado en la lista de materias.")
-
-        codigo = input("Código de materia aprobada: ")
- """
 
 # Funcion que reciba por parametro ID con materia cursada previamente para evaluar si puede cursar una materia siguiente (Puede devolver un booleano como true - false)
 
@@ -243,9 +210,13 @@ def listas_de_materias(materias):
 def recorrer_plan_completo(lista):
     largo = len(lista)
     for i in range(largo):
-        # printeo unicamente el nombre que esta en la segunda posicion de cada lista
+        
         print(lista[i][0], "-", lista[i][1])
 
+def recorrer_menu():
+    print("Ingrese una opción del menú:")
+    for i in range(len(Lista_menu)):
+        print(Lista_menu[i])
 
 def menu_seleccionado(opcion_elegida, materias):
     print("Bienvenido al sistema de consulta de materias de la carrera de Ingeniería en Informática.")
@@ -263,7 +234,7 @@ def menu_seleccionado(opcion_elegida, materias):
     if opcion_elegida == 3:  # 3: Ver que materias tengo que tener aprobadas, para cursar una materia
        codigo_de_materia_a_verificar =int(input("Ingrese el código de la materia que desea verificar: "))
        correlativas = verificar_correlativas(codigo_de_materia_a_verificar, materias)
-    print(correlativas)
+    # print(correlativas)
 
     if opcion_elegida == 4:  # 4: Ver listado de materias online
         resultado = listas_de_materias(materias)
@@ -273,6 +244,8 @@ def menu_seleccionado(opcion_elegida, materias):
         resultado = listas_de_materias(materias)
         # print(formateo_lista(resultado))
 
+        
+#------------------ Listas de Datos ------------------#
 
 # hay que setear el ultimo booleano (update: Listo, esta en base a la lista igual de licenciatura habria que evaluar que materias faltan de la ingenieria) jp:espectacular :)
 materias = materias = [
@@ -330,49 +303,42 @@ materias = materias = [
     [52, "Derecho Informático", [], [], True]
 ]
 
-
-materias_harcodeadas_aprobadas = [
-    ["3.4.069", "Fundamentos de Informática", [], ["3.4.071"], True],
-    ["3.4.164", "Sistemas de Información I", [], ["3.4.207"], True],
-    ["2.1.002", "Pensamiento Crítico y Comunicación", [], [], True],
-    ["3.4.043", "Teoría de Sistemas", [], [], True],
-    ["3.1.050", "Elementos de Álgebra y Geometría", [], ["3.1.051"], False],
-]
-
-
-lista_materias_aprobadas = [
-
-]
-
-
-def recorrer_menu():
-    print("Ingrese una opción del menú:")
-    for i in range(len(Lista_menu)):
-        print(Lista_menu[i])
-
+lista_materias_aprobadas = [] # Lista para almacenar las materias aprobadas por el usuario
 
 Lista_menu = [
     "1: Ver plan de estudios completo",
-    "2: Ingresar materias aprobadas para ver cuales restan cursar",
+    "2: Ingresar materias aprobadas",
     "3: Ver que materias tengo que tener aprobadas, para cursar una materia",
     "4: Ver listado de materias online",
-    "5: Ver si una materia esta disponible para cursar online"]
+    "5: Ver si una materia esta disponible para cursar online",
+    "-1: Salir del sistema"]
 # ver si agregamos la función de promedio.
 # ver si sumamos la opcion de mostrar nota en materia ya aprobada
 
 
-def main(materias):
-    opcion_elegida = 0
-    while opcion_elegida != -1:
+print("Bienvenido al sistema de consulta de materias de la carrera de Ingeniería en Informática.")
+opcion_elegida = 0
+
+
+while opcion_elegida != -1:
+    recorrer_menu()
+    opcion_elegida = int(input("Por favor, elija una opción del menú:   "))
+    while opcion_elegida < -1 or opcion_elegida > len(Lista_menu):
+        print("Opción no válida. Por favor, ingrese una opción del menú:")
         recorrer_menu()
-        opcion_elegida = int(input())
-        if opcion_elegida >= 1 and opcion_elegida <= len(Lista_menu):
-            menu_seleccionado(opcion_elegida, materias)
-            opcion_elegida = 0
-        else:
-            print("Opción no válida. Por favor, ingrese una opción del menú:")
-            recorrer_menu()
-        opcion_elegida = int(input())
+        opcion_elegida = int(input("Por favor, elija una opción del menú:"))
+
+    if opcion_elegida != -1 :
+        menu_seleccionado(opcion_elegida, materias)
+
+        print(end="\n")
+
+        input("Presione Enter para continuar...")
+         
+        print(end="\n")
+        
+
+    
+print("Gracias por utilizar el sistema de consulta de materias. ¡Hasta luego!")
 
 
-main(materias)
