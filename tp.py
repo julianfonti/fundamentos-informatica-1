@@ -309,8 +309,9 @@ Lista_menu = [
     "1: Ver plan de estudios completo",
     "2: Ingresar materias aprobadas",
     "3: Ver que materias tengo que tener aprobadas, para cursar una materia",
-    "4: Ver listado de materias online",
-    "5: Ver si una materia esta disponible para cursar online",
+    "4: Preguntar si pudo cursar una materia"
+    "5: Ver listado de materias online",
+    "6: Ver si una materia esta disponible para cursar online",
     "-1: Salir del sistema"]
 # ver si agregamos la función de promedio.
 # ver si sumamos la opcion de mostrar nota en materia ya aprobada
