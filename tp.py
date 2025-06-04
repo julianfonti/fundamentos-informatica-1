@@ -1,6 +1,11 @@
 # Trabajo Practico -
 import os
 
+#funcion para limpiar la consola
+def limpiar_consola():
+    os.system('cls' if os.name == 'nt' else 'clear')
+
+
 # Acá van a ir y todas las funciones que se van a utilizar para el programa
 # ? Funcion que reciba por parametro ID con las materias cursadas (en base al input del usuario) y devuelve como lista la lista de materias filtradas
 def programa_restante_post_ingreso_de_materias(lista_con_materias_aprobadas, lista_materias):
@@ -218,6 +223,15 @@ def recorrer_menu():
     for i in range(len(Lista_menu)):
         print(Lista_menu[i])
 
+
+def listar_matrias_aprobadas(lista_materias_aprobadas):
+
+    for i in range(len(lista_materias_aprobadas)):
+        for j in range(len(materias)):
+            if lista_materias_aprobadas[i] == materias[j][0]:
+                print("Materia aprobada: ✅", materias[j][1], "- Código:", materias[j][0])
+
+
 def menu_seleccionado(opcion_elegida, materias):
     print("Bienvenido al sistema de consulta de materias de la carrera de Ingeniería en Informática.")
     if opcion_elegida == 1:
@@ -228,7 +242,7 @@ def menu_seleccionado(opcion_elegida, materias):
     if opcion_elegida == 2:
         print('Ingrese las materias aprobadas para ver cuales restan cursar')
         registrar_materias_aprobadas(materias, lista_materias_aprobadas)
-        print(lista_materias_aprobadas)
+        listar_matrias_aprobadas(lista_materias_aprobadas)
         # FALTA ESTA DEF
 
     if opcion_elegida == 3:  # 3: Ver que materias tengo que tener aprobadas, para cursar una materia
@@ -337,9 +351,9 @@ while opcion_elegida != -1:
         input("Presione Enter para continuar...")
          
         print(end="\n")
-        
-
     
+    limpiar_consola()    
+
 print("Gracias por utilizar el sistema de consulta de materias. ¡Hasta luego!")
 
 
