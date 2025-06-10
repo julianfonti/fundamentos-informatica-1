@@ -1,9 +1,11 @@
-# Trabajo Practico -s
 import os
 
-#funcion para limpiar la consola
+# Función para limpiar la consola de forma multiplataforma
 def limpiar_consola():
-    os.system('cls')
+    if os.name == 'nt':
+        os.system('cls')  # Windows
+    else:
+        os.system('clear')  # Unix (Linux, macOS, iOS)
 
 def mostrar_bienvenida():
     print("\n" * 2)
@@ -32,6 +34,8 @@ def programa_restante_post_ingreso_de_materias(lista_con_materias_aprobadas, lis
             materias_restantes.append(lista_materias[i])
     return materias_restantes
 
+
+# def pedirle_materia_al_usuario():
 
 # Funcion que registra las materias ingresadas por el usuario como aprobadas. Verifica que esté en lista materias, en caso de ser correcto la almacena.
 # Para finalizar con el ingreso de materias aprobadas ingresa -1.
@@ -71,19 +75,22 @@ def puede_cursar_materia(codigo_materia, lista_materias_aprobadas,materias):
         print("La materia con código", codigo_materia, "no tiene correlativas.")
         
     else:
-        for i in range(len(correlativas)):
-            tine_materia_aprobada = False
+        for i in range(len(correlativas)):#[5]
+            tiene_materia_aprobada = False
 
             # Verificamos si cada correlativa está en la lista de materias aprobadas
-            for j in range(len(lista_materias_aprobadas)):
+            for j in range(len(lista_materias_aprobadas)):#[,]
                 if correlativas[i] == lista_materias_aprobadas[j]:
-                    print("Tiene aprobada la correlativa con código", correlativas[i])
-                    tine_materia_aprobada = True
+                    nombre_correlativa = devolver_nombre_segun_codigo(correlativas[i], materias)
+                    print("Tiene aprobada la correlativa: ", nombre_correlativa)
+                    tiene_materia_aprobada = True
 
-            if tine_materia_aprobada == False:
+            if tiene_materia_aprobada == False:
                 # Si alguna correlativa no está aprobada, no puede cursar la materia
-                print("No puede cursar la materia con código", codigo_materia, "porque le falta aprobar la correlativa con código", correlativas[i])
-                puede_cursar= False
+                nombre_correlativa = devolver_nombre_segun_codigo(correlativas[i], materias)
+                nombre_materia_a_cursar = devolver_nombre_segun_codigo(codigo_materia, materias)
+                print("No puede cursar la materia: ", nombre_materia_a_cursar, "porque le falta aprobar la correlativa: ", nombre_correlativa)
+                puede_cursar = False
         
         
         
@@ -144,9 +151,6 @@ def verificar_correlativas(codigo_materia, materias):
 
 # Funcion que responda si ya puede reclamar el titulo intermedio de la carrera🔥
 
-
-def titulo_intermedio(lista_con_materias_aprobadas):
-    print("Con la lista que me viene como parametro tengo que analizar si estoy en condiciones para reclamar el titulo intermedio o no")
 
 
 # Funcion que le permita ingresar dichas notas con su materia final y le calcule el promedio que lleva en la carrera
@@ -209,8 +213,8 @@ def materia_online_id(materias):
     verificar = True
     while verificar == True:
         # 1 Pido al usuario que escriba el código de una materia
-        codigo_buscar = input(
-            "Ingrese el código de la materia para verificar si se puede cursar online: ")
+        codigo_buscar = int(input(
+            "Ingrese el código de la materia para verificar si se puede cursar online: "))
 
         # 2 Recorro cada materia dentro de la lista "materias"
         encontrada = False
@@ -259,9 +263,15 @@ def recorrer_plan_completo(lista):
 
 def recorrer_menu():
     print("Ingrese una opción del menú:")
-    for i in range(len(Lista_menu)):
-        print(Lista_menu[i])
+    for i in range(len(lista_menu)):
+        print(lista_menu[i])
 
+def devolver_nombre_segun_codigo(codigo, materias):
+    nombre_materia = ""
+    for i in range(len(materias)):
+        if materias[i][0] == codigo:
+            nombre_materia = materias[i][1]
+    return nombre_materia  
 
 def listar_matrias_aprobadas(lista_materias_aprobadas):
 
@@ -269,6 +279,14 @@ def listar_matrias_aprobadas(lista_materias_aprobadas):
         for j in range(len(materias)):
             if lista_materias_aprobadas[i] == materias[j][0]:
                 print("Materia aprobada: ✅", materias[j][1], "- Código:", materias[j][0])
+
+def mostrar_materias_online(materias):
+    print("Listado de materias que se pueden cursar online:")
+    rango = range(len(materias))
+    for i in rango:
+        if materias[i][4] == True:
+            print(materias[i][0], "-", materias[i][1])
+
 
 
 def menu_seleccionado(opcion_elegida, materias):
@@ -290,25 +308,23 @@ def menu_seleccionado(opcion_elegida, materias):
     # print(correlativas)
 
     if opcion_elegida == 4:  # 4: Ver listado de materias online
-        resultado = listas_de_materias(materias)
-        # print(formateo_lista(resultado))
+        codigo_materia = int(input("Ingrese el código de la materia que desea verificar: "))
+        puede_cursar_materia(codigo_materia, lista_materias_aprobadas, materias)
 
     if opcion_elegida == 5:  # 5: Ver si una materia esta disponible para cursar online
-        resultado = listas_de_materias(materias)
-        # print(formateo_lista(resultado))
+        mostrar_materias_online(materias)
 
     if opcion_elegida == 6:  # 6: Ver si una materia esta disponible para cursar online
         materia_online_id(materias)
     
     if opcion_elegida == 7:  # 7: Ver si pudo cursar una materia, segun mis materias aprobadas
-        codigo_materia = int(input("Ingrese el código de la materia que desea verificar: "))
-        puede_cursar_materia()#pdirle input en la funcion 
+        validar_titulo_intermedio(lista_materias_aprobadas)
 
         
 #------------------ Listas de Datos ------------------#
 
 # hay que setear el ultimo booleano (update: Listo, esta en base a la lista igual de licenciatura habria que evaluar que materias faltan de la ingenieria) jp:espectacular :)
-materias = materias = [
+materias = [
     [1, "Fundamentos de Informática", [], [6], True],
     [2, "Sistemas de Información I", [], [13], True],
     [3, "Pensamiento Crítico y Comunicación", [], [], True],
@@ -363,21 +379,38 @@ materias = materias = [
     [52, "Derecho Informático", [], [], True]
 ]
 
-lista_materias_aprobadas = [] # Lista para almacenar las materias aprobadas por el usuario
+# lista_materias_aprobadas = [] # Lista para almacenar las materias aprobadas por el usuario
+lista_materias_aprobadas = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52] # Lista de materias aprobadas para pruebas
 
-Lista_menu = [
+lista_menu = [
     "1: Ver plan de estudios completo",
     "2: Ingresar materias aprobadas",
     "3: Ver que materias tengo que tener aprobadas, para cursar una materia",
-    "4: Preguntar si pudo cursar una materia"
+    "4: Ver si pudo cursar una materia, segun mis materias aprobadas",
     "5: Ver listado de materias online",
     "6: Ver si una materia esta disponible para cursar online",
-    "7: Ver si pudo cursar una materia, segun mis materias aprobadas",
-    "8: Ver si puedo reclamar el titulo intermedio",
+    "7:  Ver si puedo reclamar el titulo intermedio",
     "-1: Salir del sistema"]
 # ver si agregamos la función de promedio.
 # ver si sumamos la opcion de mostrar nota en materia ya aprobada
 
+
+def validar_titulo_intermedio(lista_materias_aprobadas):
+    requisito = 27
+    lista_requisitos = []
+    # if len(lista_materias_aprobadas) < requisito:
+    #     print("No tenes las materias aprobadas necesarias para reclamar el titulo intermedio")
+    for i in range(len(lista_requisitos)):
+        validar_titulo = False 
+
+        for j in range(len(lista_materias_aprobadas)):
+           if lista_requisitos[i] == lista_materias_aprobadas[j]:
+                print("Tenes las materias aprobadas necesarias para reclamar el titulo intermedio")
+                validar_titulo = True  
+        if validar_titulo == False:
+            print("No tenes las materias aprobadas necesarias para reclamar el titulo intermedio")
+            # break
+        
 
 mostrar_bienvenida()
 opcion_elegida = 0
@@ -386,7 +419,7 @@ opcion_elegida = 0
 while opcion_elegida != -1:
     recorrer_menu()
     opcion_elegida = int(input("Por favor, elija una opción del menú:   "))
-    while opcion_elegida < -1 or opcion_elegida > len(Lista_menu):
+    while opcion_elegida < -1 or opcion_elegida > len(lista_menu):
         print("Opción no válida. Por favor, ingrese una opción del menú:")
         recorrer_menu()
         opcion_elegida = int(input("Por favor, elija una opción del menú:"))
