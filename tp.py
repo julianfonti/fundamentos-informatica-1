@@ -1,9 +1,22 @@
-# Trabajo Practico -
+# Trabajo Practico -s
 import os
 
 #funcion para limpiar la consola
 def limpiar_consola():
-    os.system('cls' if os.name == 'nt' else 'clear')
+    os.system('cls')
+
+def mostrar_bienvenida():
+    print("\n" * 2)
+    print("****************************************************")
+    print("*                                                  *")
+    print("*        BIENVENIDO AL SISTEMA DE GESTIÓN          *")
+    print("*                                                  *")
+    print("*           DE MATERIAS UNIVERSITARIAS             *")
+    print("*                                                  *")
+    print("*        Creado por Iair, Julian y Juan Pablo      *")
+    print("*                                                  *")
+    print("****************************************************")
+    print("\n" * 2)
 
 
 # Acá van a ir y todas las funciones que se van a utilizar para el programa
@@ -48,6 +61,37 @@ def registrar_materias_aprobadas(materias, lista_aprobadas):
         codigo = int(input("Código de materia aprobada: "))
     return lista_aprobadas
 
+#funcin que devuelve true o false si pueede cursar una materia o no
+def puede_cursar_materia(codigo_materia, lista_materias_aprobadas,materias):
+    # Recorremos la lista de materias aprobadas
+    correlativas = verificar_correlativas(codigo_materia, materias)
+    puede_cursar = True
+    if len(correlativas) == 0:
+        # Si no tiene correlativas, puede cursar la materia
+        print("La materia con código", codigo_materia, "no tiene correlativas.")
+        
+    else:
+        for i in range(len(correlativas)):
+            tine_materia_aprobada = False
+
+            # Verificamos si cada correlativa está en la lista de materias aprobadas
+            for j in range(len(lista_materias_aprobadas)):
+                if correlativas[i] == lista_materias_aprobadas[j]:
+                    print("Tiene aprobada la correlativa con código", correlativas[i])
+                    tine_materia_aprobada = True
+
+            if tine_materia_aprobada == False:
+                # Si alguna correlativa no está aprobada, no puede cursar la materia
+                print("No puede cursar la materia con código", codigo_materia, "porque le falta aprobar la correlativa con código", correlativas[i])
+                puede_cursar= False
+        
+        
+        
+        
+    # Si no encontramos el código, devolvemos False
+    return puede_cursar 
+
+
 
 # Funcion que reciba por parametro ID con materia cursada previamente para evaluar si puede cursar una materia siguiente (Puede devolver un booleano como true - false)
 
@@ -91,16 +135,11 @@ def verificar_correlativas(codigo_materia, materias):
                                 # Agregamos esta correlativa a la lista de pendientes,
                                 # para luego verificar si ella también tiene sus propias correlativas
                                 pendientes.append(cod_corr)
+        # print("Pendientes", pendientes)
         return pendientes
 
 
 # FALTA ESTA DEF.
-
-# Funcion que reciba por parametro ID con la materia que quiere cursar y devuelve una lista de materias que necesita cursar previamente para poder cursar la materia deseada.
-
-
-def materias_necesarias_previas(id_materia_que_quiero_cursar):
-    print("hay que crear la funcion que me retorna una lista con las materias que necesito cursar previamente para poder cursarla")
 
 
 # Funcion que responda si ya puede reclamar el titulo intermedio de la carrera🔥
@@ -258,6 +297,13 @@ def menu_seleccionado(opcion_elegida, materias):
         resultado = listas_de_materias(materias)
         # print(formateo_lista(resultado))
 
+    if opcion_elegida == 6:  # 6: Ver si una materia esta disponible para cursar online
+        materia_online_id(materias)
+    
+    if opcion_elegida == 7:  # 7: Ver si pudo cursar una materia, segun mis materias aprobadas
+        codigo_materia = int(input("Ingrese el código de la materia que desea verificar: "))
+        puede_cursar_materia()#pdirle input en la funcion 
+
         
 #------------------ Listas de Datos ------------------#
 
@@ -326,12 +372,14 @@ Lista_menu = [
     "4: Preguntar si pudo cursar una materia"
     "5: Ver listado de materias online",
     "6: Ver si una materia esta disponible para cursar online",
+    "7: Ver si pudo cursar una materia, segun mis materias aprobadas",
+    "8: Ver si puedo reclamar el titulo intermedio",
     "-1: Salir del sistema"]
 # ver si agregamos la función de promedio.
 # ver si sumamos la opcion de mostrar nota en materia ya aprobada
 
 
-print("Bienvenido al sistema de consulta de materias de la carrera de Ingeniería en Informática.")
+mostrar_bienvenida()
 opcion_elegida = 0
 
 
