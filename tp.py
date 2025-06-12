@@ -26,6 +26,7 @@ def mostrar_bienvenida():
 
 # Acá van a ir y todas las funciones que se van a utilizar para el programa
 # ? Funcion que reciba por parametro ID con las materias cursadas (en base al input del usuario) y devuelve como lista la lista de materias filtradas
+#! flowchart listo
 def programa_restante_post_ingreso_de_materias(lista_con_materias_aprobadas, lista_materias):
     materias_restantes = []
     for i in range(len(lista_materias)):
@@ -111,6 +112,9 @@ def puede_cursar_materia(codigo_materia, lista_materias_aprobadas, materias):
 # Funcion que reciba por parametro ID con materia cursada previamente para evaluar si puede cursar una materia siguiente (Puede devolver un booleano como true - false)
 
 #! flowchart iair
+# ? No es mejorar retornar las correlativas en vez de estar retornando los pendientes, porque retornamos los pendientes??
+
+
 def verificar_correlativas(codigo_materia, materias):
     pendientes = [codigo_materia]
     indice = 0
@@ -159,7 +163,7 @@ def materias_online(lista_materias):
 
 
 # Funcion que devuelve si una materia con ID (pasado por parametro) puede ser cursada por online o no
-
+#! flowchart iair
 def materia_online_id(materias):
     verificar = True
     while verificar == True:
