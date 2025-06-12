@@ -75,6 +75,7 @@ def registrar_materias_aprobadas(materias, lista_aprobadas):
 #! flowchart in progress iair
 
 
+""" 
 def puede_cursar_materia(codigo_materia, lista_materias_aprobadas, materias):
     # Recorremos la lista de materias aprobadas
     correlativas = verificar_correlativas(codigo_materia, materias)
@@ -89,6 +90,8 @@ def puede_cursar_materia(codigo_materia, lista_materias_aprobadas, materias):
 
             # Verificamos si cada correlativa está en la lista de materias aprobadas
             for j in range(len(lista_materias_aprobadas)):  # [,]
+                nombre_materia_a_cursar = devolver_nombre_segun_codigo(
+                    codigo_materia, materias)
                 if correlativas[i] == lista_materias_aprobadas[j]:
                     nombre_correlativa = devolver_nombre_segun_codigo(
                         correlativas[i], materias)
@@ -99,14 +102,49 @@ def puede_cursar_materia(codigo_materia, lista_materias_aprobadas, materias):
                 # Si alguna correlativa no está aprobada, no puede cursar la materia
                 nombre_correlativa = devolver_nombre_segun_codigo(
                     correlativas[i], materias)
-                nombre_materia_a_cursar = devolver_nombre_segun_codigo(
-                    codigo_materia, materias)
                 print("No puede cursar la materia: ", nombre_materia_a_cursar,
                       "porque le falta aprobar la correlativa: ", nombre_correlativa)
                 puede_cursar = False
 
     # Si no encontramos el código, devolvemos False
-    return puede_cursar
+    return puede_cursar """
+
+
+def puede_cursar_materia(codigo_materia, lista_materias_aprobadas, materias):
+    correlativas = verificar_correlativas(codigo_materia, materias)
+    aprobadas = []
+    faltantes = []
+
+    for i in range(len(correlativas)):
+        esta_aprobada = False
+        for j in range(len(lista_materias_aprobadas)):
+            if correlativas[i] == lista_materias_aprobadas[j]:
+                esta_aprobada = True
+        nombre_correlativa = devolver_nombre_segun_codigo(
+            correlativas[i], materias)
+        if esta_aprobada:
+            aprobadas.append(nombre_correlativa)
+        else:
+            faltantes.append(nombre_correlativa)
+
+    nombre_materia = devolver_nombre_segun_codigo(codigo_materia, materias)
+
+    if len(correlativas) == 0:
+        print("La materia con código", codigo_materia, "no tiene correlativas.")
+    elif len(faltantes) == 0:
+        print("Puede cursar la materia:", nombre_materia)
+        print("Tiene aprobadas todas las correlativas:")
+        for nombre in aprobadas:
+            print("-", nombre)
+    else:
+        print("No puede cursar la materia:", nombre_materia)
+        if len(aprobadas) > 0:
+            print("Ya tiene aprobadas:")
+            for nombre in aprobadas:
+                print("-", nombre)
+        print("Le falta aprobar:")
+        for nombre in faltantes:
+            print("-", nombre)
 
 
 # Funcion que reciba por parametro ID con materia cursada previamente para evaluar si puede cursar una materia siguiente (Puede devolver un booleano como true - false)
@@ -116,33 +154,31 @@ def puede_cursar_materia(codigo_materia, lista_materias_aprobadas, materias):
 
 
 def verificar_correlativas(codigo_materia, materias):
-    pendientes = [codigo_materia]
+    pendientes = []
     indice = 0
 
-    # Mientras haya materias pendientes de verificar:
+    # Buscamos la materia inicial y agregamos sus correlativas directas a pendientes
+    for i in range(len(materias)):
+        if materias[i][0] == codigo_materia:
+            correlativas = materias[i][2]
+            for cod_corr in correlativas:
+                pendientes.append(cod_corr)
+
+    # Ahora recorremos correlativas en cadena
     while indice < len(pendientes):
-        # Tomamos el código de materia actual
         actual = pendientes[indice]
         indice = indice + 1
-
-        # Recorremos toda la lista de materias para encontrar la que coincide con el código actual
         for i in range(len(materias)):
             if materias[i][0] == actual:
                 correlativas = materias[i][2]
-
-                if len(correlativas) == 0:
-                    print("La materia", materias[i][0], "-",
-                          materias[i][1], "no tiene correlativas.")
-                else:
-                    print(
-                        "La materia", materias[i][0], "-", materias[i][1], "tiene como correlativas a:")
-                    for j in range(len(correlativas)):
-                        cod_corr = correlativas[j]
-                        for k in range(len(materias)):
-                            if materias[k][0] == cod_corr:
-                                print("  ->", materias[k]
-                                      [0], "-", materias[k][1])
-                                pendientes.append(cod_corr)
+                for cod_corr in correlativas:
+                    # Chequear que no esté ya en pendientes
+                    ya_esta = False
+                    for x in range(len(pendientes)):
+                        if pendientes[x] == cod_corr:
+                            ya_esta = True
+                    if ya_esta == False:
+                        pendientes.append(cod_corr)
     return pendientes
 
 # Funcion que devuelva listado de materias online
