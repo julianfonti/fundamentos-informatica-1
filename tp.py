@@ -72,8 +72,6 @@ def registrar_materias_aprobadas(materias, lista_aprobadas):
 
 # funcin que devuelve true o false si pueede cursar una materia o no
 
-#! flowchart in progress iair
-
 
 """ 
 def puede_cursar_materia(codigo_materia, lista_materias_aprobadas, materias):
@@ -108,6 +106,8 @@ def puede_cursar_materia(codigo_materia, lista_materias_aprobadas, materias):
 
     # Si no encontramos el código, devolvemos False
     return puede_cursar """
+
+#! Flowchart hecho
 
 
 def puede_cursar_materia(codigo_materia, lista_materias_aprobadas, materias):
@@ -183,6 +183,8 @@ def verificar_correlativas(codigo_materia, materias):
 
 # Funcion que devuelva listado de materias online
 
+#! flowchart iair
+
 
 def materias_online(lista_materias):
     nombres = []
@@ -230,6 +232,8 @@ def materia_online_id(materias):
         if respuesta != "si":
             verificar = False
             print("Fin de la verificación.")
+
+# ? Estamos repitiendo codigo, cual va?
 
 
 def materia_online_id(materias):
