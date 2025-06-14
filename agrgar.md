@@ -12,3 +12,6 @@
     "6: Ver si una materia esta disponible para cursar online",
     "7:  Ver si puedo reclamar el titulo intermedio",
     "-1: Salir del sistema"
+
+
+agrgar le priint el 3
