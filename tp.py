@@ -218,40 +218,6 @@ def materias_online(lista_materias):
     return nombres
 
 
-# Funcion que devuelve si una materia con ID (pasado por parametro) puede ser cursada por online o no
-#! flowchart iair
-def materia_online_id(materias):
-    verificar = True
-    while verificar == True:
-        # 1 Pido al usuario que escriba el código de una materia
-        codigo_buscar = input(
-            "Ingrese el código de la materia para verificar si se puede cursar online: ")
-
-        # 2 Recorro cada materia dentro de la lista "materias"
-        encontrada = False
-        for materia in materias:
-            # materia[0] es el código de la materia
-            if materia[0] == codigo_buscar:
-                encontrada = True
-                # 3 Verifico si se puede cursar online (último valor de la lista)
-                if materia[-1] == True:
-                    print("La materia '" +
-                          materia[1] + "' se puede cursar online.")
-                else:
-                    print("La materia '" +
-                          materia[1] + "' NO se puede cursar online.")
-
-        # 4 Si no se encontró la materia
-        if encontrada == False:
-            print("Código de materia no encontrado.")
-
-        # 5 Pregunto si quiere verificar otra materia
-        respuesta = input("¿Querés verificar otra materia? (si/no): ")
-        if respuesta != "si":
-            verificar = False
-            print("Fin de la verificación.")
-
-# ? Estamos repitiendo codigo, cual va?
 
 
 def materia_online_id(materias):
@@ -259,31 +225,33 @@ def materia_online_id(materias):
     while verificar == True:
         # 1 Pido al usuario que escriba el código de una materia
         codigo_buscar = int(input(
-            "Ingrese el código de la materia para verificar si se puede cursar online: "))
+            "Ingrese el código de la materia para verificar si se puede cursar online(o 0 para ver el plan): "))
+        if codigo_buscar == 0:
+            recorrer_plan_completo(materias)
+        else: 
+            # 2 Recorro cada materia dentro de la lista "materias"
+            encontrada = False
+            for materia in materias:
+                # materia[0] es el código de la materia
+                if materia[0] == codigo_buscar:
+                    encontrada = True
+                    # 3 Verifico si se puede cursar online (último valor de la lista)
+                    if materia[-1] == True:
+                        print("La materia '" +
+                            materia[1] + "' se puede cursar online.")
+                    else:
+                        print("La materia '" +
+                            materia[1] + "' NO se puede cursar online.")
 
-        # 2 Recorro cada materia dentro de la lista "materias"
-        encontrada = False
-        for materia in materias:
-            # materia[0] es el código de la materia
-            if materia[0] == codigo_buscar:
-                encontrada = True
-                # 3 Verifico si se puede cursar online (último valor de la lista)
-                if materia[-1] == True:
-                    print("La materia '" +
-                          materia[1] + "' se puede cursar online.")
-                else:
-                    print("La materia '" +
-                          materia[1] + "' NO se puede cursar online.")
+            # 4 Si no se encontró la materia
+            if encontrada == False:
+                print("Código de materia no encontrado.")
 
-        # 4 Si no se encontró la materia
-        if encontrada == False:
-            print("Código de materia no encontrado.")
-
-        # 5 Pregunto si quiere verificar otra materia
-        respuesta = input("¿Querés verificar otra materia? (si/no): ")
-        if respuesta != "si":
-            verificar = False
-            print("Fin de la verificación.")
+            # 5 Pregunto si quiere verificar otra materia
+            respuesta = input("¿Querés verificar otra materia? (si/no): ")
+            if respuesta != "si":
+                verificar = False
+                print("Fin de la verificación.")
 
 # Valores puestos en array de las materias universitarias
 
