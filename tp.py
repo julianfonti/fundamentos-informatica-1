@@ -56,6 +56,7 @@ def registrar_materias_aprobadas(materias, lista_aprobadas):
         if codigo == 0:
             recorrer_plan_completo(materias)
         else:
+            ralizo_ingreso_materias = True #! anotar en el flawchart que se ralizo el ingreso de materias
             existe = False
             for materia in materias:
                 if materia[0] == codigo:
@@ -63,12 +64,28 @@ def registrar_materias_aprobadas(materias, lista_aprobadas):
                     if codigo in lista_aprobadas:
                         print("Ya ingresaste esa materia previamente")
                     else:
+
                         lista_aprobadas.append(codigo)
             if existe == False:
                 print(
                     "No se encontró ese código de materia. Presione 0 para ver la lista de materias nuevamente")
         codigo = int(input("Código de materia aprobada: "))
+    
+    lista_aprobadas = ordenar_lista_enteros(lista_aprobadas) #! anotar en el flawchart que se ordena la lista de materias aprobadas
     return lista_aprobadas
+
+
+def ordenar_lista_enteros(lista):
+    n = len(lista)
+    if n > 1:
+        for i in range(n): 
+            for j in range(0, n-i-1):
+                if lista[j] > lista[j+1]:
+                    temp = lista[j]
+                    lista[j] = lista[j+1]
+                    lista[j+1] = temp
+    
+    return lista
 
 # funcin que devuelve true o false si pueede cursar una materia o no
 
@@ -336,7 +353,8 @@ def mostrar_materias_online(materias):
             print(materias[i][0], "-", materias[i][1])
 
 
-def menu_seleccionado(opcion_elegida, materias):
+def menu_seleccionado(opcion_elegida, materias, lista_materias_aprobadas):
+    lista_materias_aprobadas = []
     print("Bienvenido al sistema de consulta de materias de la carrera de Ingeniería en Informática.")
     if opcion_elegida == 1:
         # resultado = listas_de_materias(materias)
@@ -345,8 +363,9 @@ def menu_seleccionado(opcion_elegida, materias):
 
     if opcion_elegida == 2:
         print('Ingrese las materias aprobadas para ver cuales restan cursar')
-        registrar_materias_aprobadas(materias, lista_materias_aprobadas)
+        lista_materias_aprobadas = registrar_materias_aprobadas(materias, lista_materias_aprobadas)
         listar_matrias_aprobadas(lista_materias_aprobadas)
+    
         # FALTA ESTA DEF
 
     if opcion_elegida == 3:
@@ -357,7 +376,10 @@ def menu_seleccionado(opcion_elegida, materias):
         )
 
     if opcion_elegida == 4:
-        bucle_consulta_dos_param(
+        if realizo_ingreso_materias == False:
+            print("Primero debe ingresar las materias aprobadas.(opcion 2)")
+        else: 
+            bucle_consulta_dos_param(
             "Ingrese el código de la materia que desea verificar (o -1 para salir): ",
             puede_cursar_materia,
             materias,
@@ -371,7 +393,13 @@ def menu_seleccionado(opcion_elegida, materias):
         materia_online_id(materias)
 
     if opcion_elegida == 7:  # 7: Ver si pudo cursar una materia, segun mis materias aprobadas
-        validar_titulo_intermedio(lista_materias_aprobadas)
+        if realizo_ingreso_materias == False:
+            print("Primero debe ingresar las materias aprobadas.(opcion 2)")
+        else:
+            validar_titulo_intermedio(lista_materias_aprobadas)
+    
+    return lista_materias_aprobadas#devuelvo la lista para cambiar la lista y no hacerl global
+
 
 
 # ------------------ Listas de Datos ------------------#
@@ -436,6 +464,8 @@ materias = [
 lista_materias_aprobadas = []
 # lista_materias_aprobadas = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52] # Lista de materias aprobadas para pruebas
 
+realizo_ingreso_materias = False
+
 lista_menu = [
     "1: Ver plan de estudios completo",
     "2: Ingresar materias aprobadas",
@@ -481,7 +511,7 @@ while opcion_elegida != -1:
         opcion_elegida = int(input("Por favor, elija una opción del menú:"))
 
     if opcion_elegida != -1:
-        menu_seleccionado(opcion_elegida, materias)
+        lista_materias_aprobadas = menu_seleccionado(opcion_elegida, materias, lista_materias_aprobadas)
 
         print(end="\n")
 
