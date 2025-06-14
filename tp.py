@@ -366,7 +366,7 @@ def mostrar_materias_online(materias):
 
 def menu_seleccionado(opcion_elegida, materias, lista_materias_aprobadas):
     # lista_materias_aprobadas = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52] # Lista de materias aprobadas para pruebas
-    lista_materias_aprobadas = []
+    
 
     print("Bienvenido al sistema de consulta de materias de la carrera de Ingeniería en Informática.")
     if opcion_elegida == 1:
@@ -492,7 +492,7 @@ lista_menu = [
 
 
 def validar_titulo_intermedio(lista_materias_aprobadas):
-    print(lista_materias_aprobadas)
+    # print(lista_materias_aprobadas)
     requisito = 27
     lista_requisitos = []
     for z in range(requisito):
